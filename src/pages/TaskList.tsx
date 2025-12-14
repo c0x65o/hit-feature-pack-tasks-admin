@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { PlayCircle, Clock, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
 import { useUi } from '@hit/ui-kit';
-import { formatDate } from '@hit/sdk';
+import { formatRelativeTime } from '@hit/sdk';
 import { useTasks, type Task } from '../hooks/useTasks';
 
 interface TaskListProps {
@@ -210,10 +210,10 @@ export function TaskList({ onNavigate }: TaskListProps) {
             },
             {
               key: 'created_at',
-              label: 'Created',
+              label: 'Last Run',
               sortable: true,
               render: (value) =>
-                value ? formatDate(String(value)) : '—',
+                value ? formatRelativeTime(String(value)) : '—',
             },
             {
               key: 'actions',

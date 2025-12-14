@@ -3,7 +3,7 @@ import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-run
 import { useState } from 'react';
 import { PlayCircle, Clock } from 'lucide-react';
 import { useUi } from '@hit/ui-kit';
-import { formatDate } from '@hit/sdk';
+import { formatRelativeTime } from '@hit/sdk';
 import { useTasks } from '../hooks/useTasks';
 export function TaskList({ onNavigate }) {
     const { Page, Card, Button, Badge, DataTable, Alert, Spinner } = useUi();
@@ -139,9 +139,9 @@ export function TaskList({ onNavigate }) {
                         },
                         {
                             key: 'created_at',
-                            label: 'Created',
+                            label: 'Last Run',
                             sortable: true,
-                            render: (value) => value ? formatDate(String(value)) : '—',
+                            render: (value) => value ? formatRelativeTime(String(value)) : '—',
                         },
                         {
                             key: 'actions',
