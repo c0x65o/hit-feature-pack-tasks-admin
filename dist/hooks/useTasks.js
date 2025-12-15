@@ -3,10 +3,10 @@
  * Tasks Admin API hooks
  */
 import { useState, useEffect, useCallback } from 'react';
-// Get the tasks API URL - use new /api/hit/tasks endpoint that reads from hit.yaml
+// Get the tasks API URL - use proxy route to tasks module
 function getTasksUrl() {
-    // Use the new local API route that reads tasks from hit.yaml (no sync needed)
-    return '/api/hit/tasks';
+    // Use proxy route to tasks module which reads from hit.yaml config
+    return '/api/proxy/tasks/hit/tasks';
 }
 function getAuthHeaders() {
     if (typeof window === 'undefined')
