@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { PlayCircle, Clock, CheckCircle, XCircle, AlertCircle, Calendar, ListChecks } from 'lucide-react';
+import { PlayCircle, Clock, CheckCircle, XCircle, AlertCircle, Calendar, ListChecks, RefreshCw } from 'lucide-react';
 import { useUi, type BreadcrumbItem } from '@hit/ui-kit';
 import { formatDateTime } from '@hit/sdk';
 import { useTask, useTaskExecutions, useTaskMutations, type Task } from '../hooks/useTasks';
@@ -90,6 +90,11 @@ export function TaskDetail({ taskName, onNavigate }: TaskDetailProps) {
     }
   };
 
+  const handleRefresh = () => {
+    refreshTask();
+    refreshExecutions();
+  };
+
   if (taskLoading) {
     return (
       <Page title="Task Details">
@@ -148,6 +153,10 @@ export function TaskDetail({ taskName, onNavigate }: TaskDetailProps) {
           <Button variant="primary" onClick={handleExecute} loading={mutating}>
             <PlayCircle size={16} className="mr-2" />
             Execute Now
+          </Button>
+          <Button variant="secondary" onClick={handleRefresh} loading={taskLoading || executionsLoading}>
+            <RefreshCw size={16} className="mr-2" />
+            Refresh
           </Button>
         </div>
       }
