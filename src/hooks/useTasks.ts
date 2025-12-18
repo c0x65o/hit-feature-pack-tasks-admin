@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Tasks Admin API hooks
+ * Jobs Admin API hooks
  */
 
 import { useState, useEffect, useCallback } from 'react';

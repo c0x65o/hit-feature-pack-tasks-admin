@@ -97,7 +97,7 @@ export function TaskDetail({ taskName, onNavigate }: TaskDetailProps) {
 
   if (taskLoading) {
     return (
-      <Page title="Task Details">
+      <Page title="Job Details">
         <Spinner />
       </Page>
     );
@@ -105,9 +105,9 @@ export function TaskDetail({ taskName, onNavigate }: TaskDetailProps) {
 
   if (taskError || !task) {
     return (
-      <Page title="Task Details">
-        <Alert variant="error" title="Error loading task">
-          {taskError?.message || 'Task not found'}
+      <Page title="Job Details">
+        <Alert variant="error" title="Error loading job">
+          {taskError?.message || 'Job not found'}
         </Alert>
       </Page>
     );
@@ -129,7 +129,7 @@ export function TaskDetail({ taskName, onNavigate }: TaskDetailProps) {
   };
 
   const breadcrumbs: BreadcrumbItem[] = [
-    { label: 'Tasks', href: '/admin/tasks', icon: <ListChecks size={14} /> },
+    { label: 'Jobs', href: '/admin/tasks', icon: <ListChecks size={14} /> },
     { label: task.name },
   ];
 
@@ -164,7 +164,7 @@ export function TaskDetail({ taskName, onNavigate }: TaskDetailProps) {
       {/* Task Details */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         <Card>
-          <h3 className="text-lg font-semibold mb-4">Task Information</h3>
+          <h3 className="text-lg font-semibold mb-4">Job Information</h3>
           <dl className="space-y-2">
             <div>
               <dt className="text-sm text-gray-500">Name</dt>

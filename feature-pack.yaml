@@ -1,9 +1,9 @@
 # Feature Pack: tasks-admin
-# Admin dashboard for task management
+# Admin dashboard for job management
 
 name: tasks-admin
 version: 1.0.0
-description: Admin dashboard for task management, execution history, and scheduling
+description: Admin dashboard for job management, execution history, and scheduling
 
 # Route definitions - mapped to React components
 routes:
@@ -20,7 +20,7 @@ routes:
 # Navigation contributions - auto-added to shell sidebar
 nav:
   - id: tasks
-    label: Tasks
+    label: Jobs
     icon: PlayCircle
     group: system
     roles: [admin]

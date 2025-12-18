@@ -1,6 +1,6 @@
 'use client';
 /**
- * Tasks Admin API hooks
+ * Jobs Admin API hooks
  */
 import { useState, useEffect, useCallback } from 'react';
 // Get the tasks API URL - use proxy route to tasks module

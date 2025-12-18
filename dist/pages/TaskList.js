@@ -29,7 +29,7 @@ export function TaskList({ onNavigate }) {
         }
         return _jsx(Badge, { variant: "warning", children: "Complex" });
     };
-    return (_jsxs(Page, { title: "Tasks", description: "Manage and monitor task executions", actions: _jsx("div", { className: "flex gap-2", children: _jsx(Button, { variant: "primary", onClick: refresh, children: "Refresh" }) }), children: [error && (_jsx(Alert, { variant: "error", title: "Error loading tasks", children: error.message })), _jsx(Card, { children: _jsx(DataTable, { columns: [
+    return (_jsxs(Page, { title: "Jobs", description: "Manage and monitor job executions", actions: _jsx("div", { className: "flex gap-2", children: _jsx(Button, { variant: "primary", onClick: refresh, children: "Refresh" }) }), children: [error && (_jsx(Alert, { variant: "error", title: "Error loading jobs", children: error.message })), _jsx(Card, { children: _jsx(DataTable, { columns: [
                         {
                             key: 'name',
                             label: 'Name',
@@ -80,7 +80,7 @@ export function TaskList({ onNavigate }) {
                         cron: task.cron,
                         enabled: task.enabled,
                         last_run: task.last_run || null, // Schedule info now in task
-                    })), emptyMessage: "No tasks found. Tasks are automatically loaded from hit.yaml. Make sure tasks are defined in your hit.yaml file.", loading: loading, searchable: true, exportable: true, showColumnVisibility: true }) })] }));
+                    })), emptyMessage: "No jobs found. Jobs are automatically loaded from hit.yaml. Make sure jobs are defined in your hit.yaml file.", loading: loading, searchable: true, exportable: true, showColumnVisibility: true }) })] }));
 }
 export default TaskList;
 //# sourceMappingURL=TaskList.js.map

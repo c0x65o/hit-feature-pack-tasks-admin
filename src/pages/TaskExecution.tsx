@@ -71,7 +71,7 @@ export function TaskExecution({ taskName, executionId, onNavigate }: TaskExecuti
   };
 
   const breadcrumbs: BreadcrumbItem[] = [
-    { label: 'Tasks', href: '/admin/tasks', icon: <ListChecks size={14} /> },
+    { label: 'Jobs', href: '/admin/tasks', icon: <ListChecks size={14} /> },
     { label: taskName, href: `/admin/tasks/${encodeURIComponent(taskName)}`, icon: <PlayCircle size={14} /> },
     { label: `Execution ${execution.id.slice(0, 8)}` },
   ];

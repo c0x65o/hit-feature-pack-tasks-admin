@@ -48,7 +48,7 @@ export function TaskExecution({ taskName, executionId, onNavigate }) {
         }
     };
     const breadcrumbs = [
-        { label: 'Tasks', href: '/admin/tasks', icon: _jsx(ListChecks, { size: 14 }) },
+        { label: 'Jobs', href: '/admin/tasks', icon: _jsx(ListChecks, { size: 14 }) },
         { label: taskName, href: `/admin/tasks/${encodeURIComponent(taskName)}`, icon: _jsx(PlayCircle, { size: 14 }) },
         { label: `Execution ${execution.id.slice(0, 8)}` },
     ];

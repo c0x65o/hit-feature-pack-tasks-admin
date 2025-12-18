@@ -42,8 +42,8 @@ export function TaskList({ onNavigate }: TaskListProps) {
 
   return (
     <Page
-      title="Tasks"
-      description="Manage and monitor task executions"
+      title="Jobs"
+      description="Manage and monitor job executions"
       actions={
         <div className="flex gap-2">
           <Button variant="primary" onClick={refresh}>
@@ -53,7 +53,7 @@ export function TaskList({ onNavigate }: TaskListProps) {
       }
     >
       {error && (
-        <Alert variant="error" title="Error loading tasks">
+        <Alert variant="error" title="Error loading jobs">
           {error.message}
         </Alert>
       )}
@@ -144,7 +144,7 @@ export function TaskList({ onNavigate }: TaskListProps) {
             enabled: task.enabled,
             last_run: task.last_run || null, // Schedule info now in task
           }))}
-          emptyMessage="No tasks found. Tasks are automatically loaded from hit.yaml. Make sure tasks are defined in your hit.yaml file."
+          emptyMessage="No jobs found. Jobs are automatically loaded from hit.yaml. Make sure jobs are defined in your hit.yaml file."
           loading={loading}
           searchable
           exportable
