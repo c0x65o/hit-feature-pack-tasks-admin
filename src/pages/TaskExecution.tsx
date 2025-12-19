@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ArrowLeft, CheckCircle, XCircle, Clock, AlertCircle, ListChecks, PlayCircle } from 'lucide-react';
+import { ArrowLeft, CheckCircle, XCircle, Clock, AlertCircle, ListChecks, PlayCircle, RefreshCw } from 'lucide-react';
 import { useUi, type BreadcrumbItem } from '@hit/ui-kit';
 import { formatDateTime } from '@hit/sdk';
 import { useTaskExecution, type TaskExecution as TaskExecutionType } from '../hooks/useTasks';
@@ -83,6 +83,12 @@ export function TaskExecution({ name, id, onNavigate }: TaskExecutionProps) {
       title="Execution Details"
       breadcrumbs={breadcrumbs}
       onNavigate={navigate}
+      actions={
+        <Button variant="secondary" onClick={refresh} disabled={loading}>
+          <RefreshCw size={16} className={`mr-2 ${loading ? 'animate-spin' : ''}`} />
+          Refresh
+        </Button>
+      }
     >
       {/* Status Card */}
       <div className="mb-6">
