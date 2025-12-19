@@ -55,6 +55,10 @@ interface UseQueryOptions {
     limit?: number;
     offset?: number;
 }
+interface AllExecutionsOptions extends UseQueryOptions {
+    status?: string;
+    taskName?: string;
+}
 export declare function useTasks(): {
     tasks: Task[];
     loading: boolean;
@@ -85,6 +89,13 @@ export declare function useTaskMutations(): {
     updateSchedule: (taskName: string, enabled: boolean) => Promise<TaskSchedule>;
     loading: boolean;
     error: Error | null;
+};
+export declare function useAllExecutions(options?: AllExecutionsOptions): {
+    executions: TaskExecution[];
+    total: number;
+    loading: boolean;
+    error: Error | null;
+    refresh: () => Promise<void>;
 };
 export declare function useSchedules(): {
     schedules: TaskSchedule[];

@@ -224,6 +224,42 @@ export function useTaskMutations() {
     }, []);
     return { executeTask, updateSchedule, loading, error };
 }
+export function useAllExecutions(options) {
+    const [executions, setExecutions] = useState([]);
+    const [total, setTotal] = useState(0);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const refresh = useCallback(async () => {
+        try {
+            setLoading(true);
+            setError(null);
+            const params = new URLSearchParams();
+            if (options?.limit)
+                params.append('limit', options.limit.toString());
+            if (options?.offset)
+                params.append('offset', options.offset.toString());
+            if (options?.status)
+                params.append('status', options.status);
+            if (options?.taskName)
+                params.append('task_name', options.taskName);
+            const query = params.toString();
+            const url = `/hit/tasks/executions/all${query ? `?${query}` : ''}`;
+            const data = await fetchTasksModule(url);
+            setExecutions(data.executions);
+            setTotal(data.total);
+        }
+        catch (err) {
+            setError(err instanceof Error ? err : new Error('Failed to fetch executions'));
+        }
+        finally {
+            setLoading(false);
+        }
+    }, [options?.limit, options?.offset, options?.status, options?.taskName]);
+    useEffect(() => {
+        refresh();
+    }, [refresh]);
+    return { executions, total, loading, error, refresh };
+}
 export function useSchedules() {
     const [schedules, setSchedules] = useState([]);
     const [loading, setLoading] = useState(true);

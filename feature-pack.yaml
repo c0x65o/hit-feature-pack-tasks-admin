@@ -9,6 +9,9 @@ routes:
   - path: /admin/tasks
     page: TaskList
     roles: [admin]
+  - path: /admin/tasks/executions
+    page: AllExecutions
+    roles: [admin]
   - path: /admin/tasks/[name]
     page: TaskDetail
     roles: [admin]
@@ -25,7 +28,21 @@ nav:
     roles: [admin]
     showWhen: authenticated
     weight: 900
-    path: /admin/tasks
+    children:
+      - id: tasks-list
+        label: Job List
+        path: /admin/tasks
+        icon: ListChecks
+        weight: 100
+        roles: [admin]
+        showWhen: authenticated
+      - id: tasks-executions
+        label: Ran Jobs
+        path: /admin/tasks/executions
+        icon: History
+        weight: 110
+        roles: [admin]
+        showWhen: authenticated
 
 # Dependencies
 requires:
