@@ -55,7 +55,7 @@ export function AllExecutions({ onNavigate }) {
         { value: 'running', label: 'Running' },
         { value: 'pending', label: 'Pending' },
     ];
-    return (_jsxs(Page, { title: "Ran Jobs", description: "View all job execution history", actions: _jsxs("div", { className: "flex gap-2 items-center", children: [_jsx(Select, { value: statusFilter, onChange: (value) => setStatusFilter(value), options: statusOptions }), _jsx(Button, { variant: "primary", onClick: refresh, children: "Refresh" })] }), children: [error && (_jsx(Alert, { variant: "error", title: "Error loading executions", children: error.message })), _jsxs(Card, { children: [_jsx(DataTable, { columns: [
+    return (_jsxs(Page, { title: "Ran Jobs", description: "View all job execution history", actions: _jsxs("div", { className: "flex gap-2 items-center", children: [_jsx(Select, { value: statusFilter, onChange: (value) => setStatusFilter(value), options: statusOptions, style: { marginBottom: 0 } }), _jsx(Button, { variant: "primary", onClick: refresh, children: "Refresh" })] }), children: [error && (_jsx(Alert, { variant: "error", title: "Error loading executions", children: error.message })), _jsxs(Card, { children: [_jsx(DataTable, { columns: [
                             {
                                 key: 'status',
                                 label: 'Status',

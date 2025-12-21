@@ -74,6 +74,7 @@ export function AllExecutions({ onNavigate }: AllExecutionsProps) {
             value={statusFilter}
             onChange={(value) => setStatusFilter(value)}
             options={statusOptions}
+            style={{ marginBottom: 0 }}
           />
           <Button variant="primary" onClick={refresh}>
             Refresh
