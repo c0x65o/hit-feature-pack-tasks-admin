@@ -106,12 +106,20 @@ export function AllExecutions({ onNavigate }: AllExecutionsProps) {
               label: 'Job Name',
               sortable: true,
               render: (value: unknown, row?: Record<string, unknown>) => (
-                <button
-                  className="font-medium text-blue-600 dark:text-blue-400 hover:underline cursor-pointer bg-transparent border-none p-0 m-0 outline-none focus:outline-none focus:ring-0"
+                <span
+                  role="button"
+                  tabIndex={0}
+                  style={{ cursor: 'pointer' }}
+                  className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
                   onClick={() => navigate(`/admin/tasks/${encodeURIComponent(String(value))}`)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      navigate(`/admin/tasks/${encodeURIComponent(String(value))}`);
+                    }
+                  }}
                 >
                   {String(value)}
-                </button>
+                </span>
               ),
             },
             {

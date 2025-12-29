@@ -65,7 +65,11 @@ export function AllExecutions({ onNavigate }) {
                                 key: 'task_name',
                                 label: 'Job Name',
                                 sortable: true,
-                                render: (value, row) => (_jsx("button", { className: "font-medium text-blue-600 dark:text-blue-400 hover:underline cursor-pointer bg-transparent border-none p-0 m-0 outline-none focus:outline-none focus:ring-0", onClick: () => navigate(`/admin/tasks/${encodeURIComponent(String(value))}`), children: String(value) })),
+                                render: (value, row) => (_jsx("span", { role: "button", tabIndex: 0, style: { cursor: 'pointer' }, className: "font-medium text-blue-600 dark:text-blue-400 hover:underline", onClick: () => navigate(`/admin/tasks/${encodeURIComponent(String(value))}`), onKeyDown: (e) => {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            navigate(`/admin/tasks/${encodeURIComponent(String(value))}`);
+                                        }
+                                    }, children: String(value) })),
                             },
                             {
                                 key: 'triggered_by',
