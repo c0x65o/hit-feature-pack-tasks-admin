@@ -2,6 +2,7 @@
 # Admin dashboard for job management
 
 name: tasks-admin
+title: HIT Tasks Admin
 description: Admin dashboard for job management, execution history, and scheduling
 
 # Route definitions - mapped to React components
