@@ -3,7 +3,7 @@
 import React from 'react';
 import { useUi } from '@hit/ui-kit';
 import { formatDateTime, formatRelativeTime } from '@hit/sdk';
-import { History, RefreshCw } from 'lucide-react';
+import { RefreshCw } from 'lucide-react';
 import { useAiTraces } from '../hooks/useAiTraces';
 
 interface AiTracesProps {
@@ -49,11 +49,7 @@ export function AiTraces({ onNavigate }: AiTracesProps) {
         <DataTable
           loading={loading}
           data={traces as any[]}
-          emptyState={{
-            icon: <History size={48} />,
-            title: 'No traces yet',
-            description: 'Traces will appear here as the AI agent is used.',
-          }}
+          emptyMessage="No traces yet. Traces will appear here as the AI agent is used."
           columns={[
             {
               key: 'startedAtMs',
