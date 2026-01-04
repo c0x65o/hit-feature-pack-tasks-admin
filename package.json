@@ -1,6 +1,6 @@
 {
   "name": "@hit/feature-pack-tasks-admin",
-  "version": "1.0.41",
+  "version": "1.0.42",
   "description": "Admin dashboard feature pack for task management. Uses @hit/ui-kit for shell-agnostic UI.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -27,7 +27,6 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "prepare": "npm run build",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {},
