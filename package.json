@@ -1,6 +1,6 @@
 {
   "name": "@hit/feature-pack-tasks-admin",
-  "version": "1.0.47",
+  "version": "1.0.48",
   "description": "Admin dashboard feature pack for task management. Uses @hit/ui-kit for shell-agnostic UI.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
