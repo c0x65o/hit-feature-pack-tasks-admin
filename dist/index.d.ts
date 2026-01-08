@@ -1,5 +1,5 @@
 /**
- * @hit/feature-pack-tasks-admin
+ * @hit/feature-pack-job-core
  *
  * Admin dashboard feature pack for job management.
  *

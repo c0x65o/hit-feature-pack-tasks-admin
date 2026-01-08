@@ -1,9 +1,9 @@
-# Feature Pack: tasks-admin
-# Admin dashboard for job management
+# Feature Pack: job-core
+# Core job management UI (execution history + scheduling)
 
-name: tasks-admin
-title: HIT Tasks Admin
-description: Admin dashboard for job management, execution history, and scheduling
+name: job-core
+title: HIT Jobs
+description: Core job management UI: execution history, schedules, and admin tools
 
 # Route definitions - mapped to React components
 routes:
