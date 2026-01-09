@@ -3,7 +3,7 @@
 
 name: job-core
 title: HIT Jobs
-description: Core job management UI: execution history, schedules, and admin tools
+description: "Core job management UI: execution history, schedules, and admin tools"
 
 # Route definitions - mapped to React components
 routes:
