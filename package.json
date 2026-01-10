@@ -1,6 +1,6 @@
 {
   "name": "@hit/feature-pack-job-core",
-  "version": "1.0.54",
+  "version": "1.0.55",
   "description": "Core job management UI: execution history, scheduling, and admin tools. Uses @hit/ui-kit for shell-agnostic UI.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
