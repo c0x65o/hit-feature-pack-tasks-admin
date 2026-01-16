@@ -33,7 +33,7 @@ function getCurrentUserEmail(): string | null {
 // Helper to fetch current user from /me endpoint
 async function fetchCurrentUserEmail(): Promise<string | null> {
   try {
-    const response = await fetch('/api/proxy/auth/me', {
+    const response = await fetch('/api/auth/me', {
       credentials: 'include',
     });
     if (response.ok) {
