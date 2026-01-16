@@ -1,5 +1,9 @@
-export { TaskList, default as TaskListPage } from './TaskList';
-export { TaskDetail, default as TaskDetailPage } from './TaskDetail';
-export { TaskExecution, default as TaskExecutionPage } from './TaskExecution';
-export { AllExecutions, default as AllExecutionsPage } from './AllExecutions';
+export { default as AllExecutions } from '../pack-pages/AllExecutions';
+export { default as TaskDetail } from '../pack-pages/TaskDetail';
+export { default as TaskExecution } from '../pack-pages/TaskExecution';
+export { default as TaskList } from '../pack-pages/TaskList';
+export * from '../pack-pages/AllExecutions';
+export * from '../pack-pages/TaskDetail';
+export * from '../pack-pages/TaskExecution';
+export * from '../pack-pages/TaskList';
 //# sourceMappingURL=index.js.map

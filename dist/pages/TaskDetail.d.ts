@@ -1,7 +1,3 @@
-interface TaskDetailProps {
-    name: string;
-    onNavigate?: (path: string) => void;
-}
-export declare function TaskDetail({ name, onNavigate }: TaskDetailProps): import("react/jsx-runtime").JSX.Element;
-export default TaskDetail;
+export { default } from '../pack-pages/TaskDetail';
+export * from '../pack-pages/TaskDetail';
 //# sourceMappingURL=TaskDetail.d.ts.map
