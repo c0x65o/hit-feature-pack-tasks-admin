@@ -4,7 +4,8 @@ import { resolveScopeMode, type ScopeMode as CoreScopeMode } from '@hit/feature-
 // We intentionally only support: none | all.
 export type ScopeMode = 'none' | 'all';
 export type ScopeVerb = 'read' | 'write' | 'delete';
-export type ScopeEntity = 'tasks' | 'executions';
+// Authz entity names align with permissions.yaml + route authz (list/results).
+export type ScopeEntity = 'list' | 'results';
 
 /**
  * Resolve effective scope mode using a tree:

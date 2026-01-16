@@ -1,12 +1,21 @@
-import { NextRequest } from 'next/server';
-import { extractUserFromRequest, type User } from '../auth';
+import { requireActionPermission } from '@hit/feature-pack-auth-core/server/lib/action-check';
+import { requireEntityAuthz, type EntityAuthzOp } from '@hit/feature-pack-auth-core/server/lib/schema-authz';
 
-export type AuthContext =
-  | { kind: 'user'; user: User };
+const JOB_CORE_SUPPORTED_MODES = ['none', 'all'] as const;
 
-export function getAuthContext(request: NextRequest): AuthContext | null {
-  const user = extractUserFromRequest(request);
-  if (user) return { kind: 'user', user };
+export async function requireJobCoreEntityAuthz(
+  request: Request,
+  args: { entityKey: string; op: EntityAuthzOp }
+) {
+  return requireEntityAuthz(request, {
+    entityKey: args.entityKey,
+    op: args.op,
+    supportedModes: [...JOB_CORE_SUPPORTED_MODES],
+    fallbackMode: 'none',
+    logPrefix: 'Job-Core',
+  });
+}
 
-  return null;
+export async function requireJobCoreExecute(request: Request) {
+  return requireActionPermission(request, 'job-core.list.execute', { logPrefix: 'Job-Core' });
 }

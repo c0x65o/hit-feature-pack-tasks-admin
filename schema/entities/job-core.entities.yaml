@@ -8,57 +8,133 @@ entities:
     api:
       resource: tasks
     security:
-      list: { authz: { entity: tasks, verb: read } }
-      detail: { authz: { entity: tasks, verb: read } }
-      new: { authz: { entity: tasks, verb: write } }
-      edit: { authz: { entity: tasks, verb: write } }
+      list: { authz: { entity: list, verb: read } }
+      detail: { authz: { entity: list, verb: read } }
+      new: { authz: { entity: list, verb: write } }
+      edit: { authz: { entity: list, verb: write } }
     meta:
       titleSingular: Job
       titlePlural: Jobs
       descriptionPlural: Manage and run system jobs
+      routes:
+        list: /admin/jobs
+        detail: /admin/jobs/{id}
       actions:
         allowCreate: false
+        allowEdit: false
+        allowDelete: false
+      headerActions:
+        - kind: action
+          label: Run
+          actionKey: job-core.task.run
+        - kind: action
+          label: Toggle Schedule
+          actionKey: job-core.task.toggleSchedule
     list:
-      widget: jobTaskList
       allowCreate: false
+      tableId: admin.jobs
+      pageSize: 25
+      initialSort: { sortBy: name, sortOrder: asc }
+      sortWhitelist: [name, last_run]
+      defaultVisibleOnly: true
+      initialColumnVisibility:
+        name: true
+        description: true
+        cron: true
+        service_name: true
+        enabled: false
+        last_run: true
+        command: false
+      columns:
+        - name
+        - description
+        - cron
+        - enabled
+        - last_run
+      rowActions:
+        - kind: action
+          label: Run
+          actionKey: job-core.task.run
     detail:
-      widget: jobTaskDetail
+      summaryTitle: Job
+      summaryFields: [name, description, cron, service_name, enabled, last_run, command]
+      extras:
+        - kind: embeddedTable
+          title: Execution History
+          entityType: job-core.execution
+          tableId: admin.jobs.task.executions
+          pageSize: 25
+          initialSort: { sortBy: enqueued_at, sortOrder: desc }
+          sortWhitelist: [enqueued_at, started_at, completed_at, status, exit_code, duration_ms]
+          columns: [status, triggered_by, enqueued_at, started_at, completed_at, duration_ms, exit_code]
+          query:
+            task_name:
+              valueFrom: { kind: parentField, field: name }
     fields:
       id: { type: text, label: ID }
       name: { type: text, label: Name }
       description: { type: text, label: Description }
       cron: { type: text, label: Schedule }
-      execution_type: { type: text, label: Execution Type }
+      command: { type: text, label: Command }
+      service_name: { type: text, label: Service }
       enabled: { type: boolean, label: Enabled }
       last_run: { type: datetime, label: Last Run }
-      next_run: { type: datetime, label: Next Run }
 
   job-core.execution:
     api:
       resource: executions
     security:
-      list: { authz: { entity: executions, verb: read } }
-      detail: { authz: { entity: executions, verb: read } }
-      new: { authz: { entity: executions, verb: write } }
-      edit: { authz: { entity: executions, verb: write } }
+      list: { authz: { entity: results, verb: read } }
+      detail: { authz: { entity: results, verb: read } }
+      new: { authz: { entity: results, verb: write } }
+      edit: { authz: { entity: results, verb: write } }
     meta:
       titleSingular: Execution
       titlePlural: Executions
       descriptionPlural: Job execution history
+      routes:
+        list: /admin/jobs/executions
+        detail: /admin/jobs/executions/{id}
       actions:
         allowCreate: false
+        allowEdit: false
+        allowDelete: false
     list:
-      widget: jobAllExecutionsList
       allowCreate: false
+      tableId: admin.jobs.executions
+      pageSize: 50
+      initialSort: { sortBy: enqueued_at, sortOrder: desc }
+      sortWhitelist: [task_name, status, enqueued_at, started_at, completed_at, duration_ms, exit_code]
+      defaultVisibleOnly: true
+      initialColumnVisibility:
+        task_name: true
+        status: true
+        triggered_by: true
+        enqueued_at: true
+        started_at: false
+        completed_at: false
+        duration_ms: true
+        exit_code: true
+      columns:
+        - task_name
+        - status
+        - triggered_by
+        - enqueued_at
+        - duration_ms
+        - exit_code
     detail:
-      widget: jobTaskExecutionDetail
+      summaryTitle: Execution
+      summaryFields: [task_name, status, triggered_by, enqueued_at, started_at, completed_at, duration_ms, exit_code, error, logs]
     fields:
       id: { type: text, label: ID }
       task_name: { type: text, label: Job Name }
       status: { type: text, label: Status }
       triggered_by: { type: text, label: Triggered By }
+      enqueued_at: { type: datetime, label: Enqueued }
       started_at: { type: datetime, label: Started }
       completed_at: { type: datetime, label: Completed }
       duration_ms: { type: number, label: Duration (ms) }
       exit_code: { type: number, label: Exit Code }
+      error: { type: textarea, label: Error }
+      logs: { type: textarea, label: Logs }
 

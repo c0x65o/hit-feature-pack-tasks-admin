@@ -1,6 +1,6 @@
 export type ScopeMode = 'none' | 'all';
 export type ScopeVerb = 'read' | 'write' | 'delete';
-export type ScopeEntity = 'tasks' | 'executions';
+export type ScopeEntity = 'list' | 'results';
 /**
  * Resolve effective scope mode using a tree:
  * - job-core default: job-core.{verb}.scope.{mode}

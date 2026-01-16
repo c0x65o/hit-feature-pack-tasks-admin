@@ -1,24 +1,11 @@
-import React from 'react';
-export type PackListWidgetRendererArgs = {
-    entityKey: string;
-    uiSpec: any;
-    listSpec: any;
-    navigate?: (path: string) => void;
-    ui: any;
-    platform: string;
-};
-export type PackDetailWidgetRendererArgs = {
-    entityKey: string;
-    uiSpec: any;
-    detailSpec: any;
-    navigate?: (path: string) => void;
-    ui: any;
-    platform: string;
-    params: Record<string, string>;
-};
+/**
+ * Job-core contrib
+ *
+ * Job-core is now schema-driven. No custom list/detail widgets are needed.
+ * Action handlers are provided for the headerActions defined in the entity schema.
+ */
 export type PackContrib = {
-    listWidgets?: Record<string, (args: PackListWidgetRendererArgs) => React.ReactNode>;
-    detailWidgets?: Record<string, (args: PackDetailWidgetRendererArgs) => React.ReactNode>;
+    actionHandlers?: Record<string, (args: any) => Promise<void> | void>;
 };
 export declare const contrib: PackContrib;
 export default contrib;

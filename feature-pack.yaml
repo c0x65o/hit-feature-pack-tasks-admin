@@ -36,6 +36,12 @@ routes:
     roles: []
     default_roles_allow: [admin]
     authz: { entity: results, verb: read, require_mode: any }
+  - path: /admin/jobs/executions/[id]
+    page: EntityDetail
+    params: { entityKey: job-core.execution }
+    roles: []
+    default_roles_allow: [admin]
+    authz: { entity: results, verb: read, require_mode: any }
   - path: /admin/jobs/[name]
     page: EntityDetail
     params: { entityKey: job-core.task }
@@ -81,6 +87,47 @@ nav:
 #   schema/permissions.yaml
 
 # Dependencies
-requires:
-  modules: [tasks]
+# (no external module dependencies - TypeScript-only)
 
+# ─────────────────────────────────────────────────────────────────────────────
+# SCHEMA - Drizzle ORM table definitions (copied into app at build time)
+# ─────────────────────────────────────────────────────────────────────────────
+schema:
+  source: src/schema/job-core.ts
+  exports:
+    - hitTaskSchedules
+    - hitTaskExecutions
+    - HitTaskSchedule
+    - InsertHitTaskSchedule
+    - HitTaskExecution
+    - InsertHitTaskExecution
+
+# ─────────────────────────────────────────────────────────────────────────────
+# API ROUTES - Pack-owned endpoints (DB-first; works local + remote)
+# ─────────────────────────────────────────────────────────────────────────────
+api:
+  routes:
+    - path: /api/job-core/tasks
+      methods: [GET]
+      handler: "@hit/feature-pack-job-core/server/api/tasks"
+      description: "List tasks from .hit/generated/hit_tasks_manifest.json with schedule + last run"
+    - path: /api/job-core/tasks/[id]
+      methods: [GET]
+      handler: "@hit/feature-pack-job-core/server/api/tasks-id"
+      description: "Get a single task definition by id (=task name)"
+    - path: /api/job-core/tasks/[id]/run
+      methods: [POST]
+      handler: "@hit/feature-pack-job-core/server/api/tasks-id-run"
+      description: "Enqueue a task execution row (DB-first); tasks worker will execute it"
+    - path: /api/job-core/tasks/[id]/schedule
+      methods: [PUT]
+      handler: "@hit/feature-pack-job-core/server/api/tasks-id-schedule"
+      description: "Enable/disable cron schedule for a task (DB-first)"
+    - path: /api/job-core/executions
+      methods: [GET]
+      handler: "@hit/feature-pack-job-core/server/api/executions"
+      description: "List task executions (DB-first)"
+    - path: /api/job-core/executions/[id]
+      methods: [GET]
+      handler: "@hit/feature-pack-job-core/server/api/executions-id"
+      description: "Get a task execution (DB-first)"

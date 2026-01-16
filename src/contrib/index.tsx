@@ -1,56 +1,49 @@
 'use client';
 
-import React from 'react';
-import { TaskList } from '../pack-pages/TaskList';
-import { AllExecutions } from '../pack-pages/AllExecutions';
-import { TaskDetail } from '../pack-pages/TaskDetail';
-import { TaskExecution } from '../pack-pages/TaskExecution';
-
-export type PackListWidgetRendererArgs = {
-  entityKey: string;
-  uiSpec: any;
-  listSpec: any;
-  navigate?: (path: string) => void;
-  ui: any;
-  platform: string;
-};
-
-export type PackDetailWidgetRendererArgs = {
-  entityKey: string;
-  uiSpec: any;
-  detailSpec: any;
-  navigate?: (path: string) => void;
-  ui: any;
-  platform: string;
-  params: Record<string, string>;
-};
+/**
+ * Job-core contrib
+ *
+ * Job-core is now schema-driven. No custom list/detail widgets are needed.
+ * Action handlers are provided for the headerActions defined in the entity schema.
+ */
 
 export type PackContrib = {
-  listWidgets?: Record<string, (args: PackListWidgetRendererArgs) => React.ReactNode>;
-  detailWidgets?: Record<string, (args: PackDetailWidgetRendererArgs) => React.ReactNode>;
+  actionHandlers?: Record<string, (args: any) => Promise<void> | void>;
 };
 
-function resolveParam(params: Record<string, string>, key: string): string {
-  const raw = params?.[key];
-  return raw ? String(raw) : '';
-}
-
 export const contrib: PackContrib = {
-  listWidgets: {
-    jobTaskList: ({ navigate }) => <TaskList onNavigate={navigate} />,
-    jobAllExecutionsList: ({ navigate }) => <AllExecutions onNavigate={navigate} />,
-  },
-  detailWidgets: {
-    jobTaskDetail: ({ navigate, params }) => (
-      <TaskDetail name={resolveParam(params, 'name') || resolveParam(params, 'id')} onNavigate={navigate} />
-    ),
-    jobTaskExecutionDetail: ({ navigate, params }) => (
-      <TaskExecution
-        name={resolveParam(params, 'name')}
-        id={resolveParam(params, 'id')}
-        onNavigate={navigate}
-      />
-    ),
+  actionHandlers: {
+    'job-core.task.run': async ({ record }: any) => {
+      const name = String(record?.id || record?.name || '').trim();
+      if (!name) throw new Error('Missing task id');
+      const res = await fetch(`/api/job-core/tasks/${encodeURIComponent(name)}/run`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({}),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(String(json?.error || `Failed to run task (${res.status})`));
+      // UX: keep it simple; user can see the new execution in the embedded table and/or Results list.
+      if (typeof window !== 'undefined') {
+        // Best-effort refresh so the embedded executions table updates.
+        window.location.reload();
+      }
+    },
+    'job-core.task.toggleSchedule': async ({ record }: any) => {
+      const name = String(record?.id || record?.name || '').trim();
+      if (!name) throw new Error('Missing task id');
+      const next = !Boolean(record?.enabled);
+      const res = await fetch(`/api/job-core/tasks/${encodeURIComponent(name)}/schedule`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ enabled: next }),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(String(json?.error || `Failed to update schedule (${res.status})`));
+      if (typeof window !== 'undefined') window.location.reload();
+    },
   },
 };
 

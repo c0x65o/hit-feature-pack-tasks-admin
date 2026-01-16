@@ -1,6 +1,6 @@
 {
   "name": "@hit/feature-pack-job-core",
-  "version": "1.0.72",
+  "version": "1.0.73",
   "description": "Core job management UI: execution history, scheduling, and admin tools. Uses @hit/ui-kit for shell-agnostic UI.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,6 +12,13 @@
       "import": "./dist/index.js",
       "require": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./schema": {
+      "development": "./src/schema/job-core.ts",
+      "types": "./dist/schema/job-core.d.ts",
+      "import": "./src/schema/job-core.ts",
+      "require": "./src/schema/job-core.ts",
+      "default": "./src/schema/job-core.ts"
     },
     "./pages/*": {
       "development": "./src/pack-pages/*.tsx",
@@ -26,6 +33,13 @@
       "import": "./dist/contrib/index.js",
       "require": "./dist/contrib/index.js",
       "default": "./dist/contrib/index.js"
+    },
+    "./server/api/*": {
+      "development": "./src/server/api/*.ts",
+      "types": "./dist/server/api/*.d.ts",
+      "import": "./src/server/api/*.ts",
+      "require": "./src/server/api/*.ts",
+      "default": "./src/server/api/*.ts"
     },
     "./server/lib/*": {
       "development": "./src/server/lib/*.ts",
@@ -49,6 +63,7 @@
     "@hit/feature-pack-auth-core": "*",
     "@hit/sdk": "*",
     "@hit/ui-kit": "*",
+    "drizzle-orm": "^0.38.0",
     "lucide-react": "^0.460.0",
     "next": "^15.5.9",
     "react": "^19.2.3"
@@ -63,10 +78,12 @@
   },
   "devDependencies": {
     "@hit/feature-pack-auth-core": "file:../hit-feature-pack-auth-core",
+    "@hit/feature-pack-stubs": "file:../../../packages/hit-feature-pack-stubs",
     "@hit/sdk": "file:../../../hit-sdks/hit-sdk-typescript",
     "@hit/ui-kit": "file:../../../packages/hit-ui-kit-ts",
     "@types/node": "^20",
     "@types/react": "^19.0.0",
+    "drizzle-orm": "^0.38.0",
     "lucide-react": "^0.460.0",
     "next": "^15.5.9",
     "typescript": "^5"

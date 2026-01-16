@@ -3,11 +3,10 @@
  *
  * Admin dashboard feature pack for job management.
  *
- * Components are exported individually for optimal tree-shaking.
- * When used with the route loader system, only the requested component is bundled.
+ * Job-core is now schema-driven. Pages are generated via EntityList/EntityDetail.
+ * See schema/entities/job-core.entities.yaml for entity definitions.
  */
-// Pages - exported individually for tree-shaking
-export { TaskList, TaskListPage, TaskDetail, TaskDetailPage, TaskExecution, TaskExecutionPage, AllExecutions, AllExecutionsPage, } from './pack-pages/index';
-// Hooks
-export * from './hooks/useTasks';
+// Server-side exports
+export * from './server/lib/require-action';
+export * from './server/lib/scope-mode';
 //# sourceMappingURL=index.js.map
