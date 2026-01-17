@@ -8,10 +8,22 @@ entities:
     api:
       resource: tasks
     security:
-      list: { authz: { entity: list, verb: read } }
-      detail: { authz: { entity: list, verb: read } }
-      new: { authz: { entity: list, verb: write } }
-      edit: { authz: { entity: list, verb: write } }
+      list:
+        roles: []
+        default_roles_allow: [admin]
+        authz: { entity: list, verb: read, require_mode: any }
+      detail:
+        roles: []
+        default_roles_allow: [admin]
+        authz: { entity: list, verb: read, require_mode: any }
+      new:
+        roles: []
+        default_roles_allow: [admin]
+        authz: { entity: list, verb: write }
+      edit:
+        roles: []
+        default_roles_allow: [admin]
+        authz: { entity: list, verb: write }
     meta:
       titleSingular: Job
       titlePlural: Jobs
@@ -86,10 +98,22 @@ entities:
     api:
       resource: executions
     security:
-      list: { authz: { entity: results, verb: read } }
-      detail: { authz: { entity: results, verb: read } }
-      new: { authz: { entity: results, verb: write } }
-      edit: { authz: { entity: results, verb: write } }
+      list:
+        roles: []
+        default_roles_allow: [admin]
+        authz: { entity: results, verb: read, require_mode: any }
+      detail:
+        roles: []
+        default_roles_allow: [admin]
+        authz: { entity: results, verb: read, require_mode: any }
+      new:
+        roles: []
+        default_roles_allow: [admin]
+        authz: { entity: results, verb: write }
+      edit:
+        roles: []
+        default_roles_allow: [admin]
+        authz: { entity: results, verb: write }
     meta:
       titleSingular: Execution
       titlePlural: Executions

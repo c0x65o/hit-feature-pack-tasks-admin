@@ -27,33 +27,18 @@ routes:
   - path: /admin/jobs
     page: EntityList
     params: { entityKey: job-core.task }
-    roles: []
-    default_roles_allow: [admin]
-    authz: { entity: list, verb: read, require_mode: any }
   - path: /admin/jobs/executions
     page: EntityList
     params: { entityKey: job-core.execution }
-    roles: []
-    default_roles_allow: [admin]
-    authz: { entity: results, verb: read, require_mode: any }
   - path: /admin/jobs/executions/[id]
     page: EntityDetail
     params: { entityKey: job-core.execution }
-    roles: []
-    default_roles_allow: [admin]
-    authz: { entity: results, verb: read, require_mode: any }
   - path: /admin/jobs/[name]
     page: EntityDetail
     params: { entityKey: job-core.task }
-    roles: []
-    default_roles_allow: [admin]
-    authz: { entity: list, verb: read, require_mode: any }
   - path: /admin/jobs/[name]/executions/[id]
     page: EntityDetail
     params: { entityKey: job-core.execution }
-    roles: []
-    default_roles_allow: [admin]
-    authz: { entity: results, verb: read, require_mode: any }
 
 # Navigation contributions - auto-added to shell sidebar
 nav:
