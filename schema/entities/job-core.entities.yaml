@@ -177,7 +177,7 @@ entities:
       enqueued_at: { type: datetime, label: Enqueued }
       started_at: { type: datetime, label: Started }
       completed_at: { type: datetime, label: Completed }
-      duration_ms: { type: number, label: Duration (ms) }
+      duration_ms: { type: duration, label: Duration, unit: ms }
       exit_code: { type: number, label: Exit Code }
       error: { type: textarea, label: Error }
       logs: { type: textarea, label: Logs }
