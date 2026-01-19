@@ -76,7 +76,7 @@ entities:
         - kind: embeddedTable
           title: Execution History
           entityType: job-core.execution
-          tableId: admin.jobs.task.executions
+          tableId: admin.jobs.executions
           pageSize: 25
           initialSort: { sortBy: enqueued_at, sortOrder: desc }
           sortWhitelist: [enqueued_at, started_at, completed_at, status, exit_code, duration_ms]
